@@ -24,6 +24,7 @@ import com.airbnb.lottie.LottieAnimationView;
  * 3. 对于好友列表 Fragment，使用 Lottie 实现 Loading 效果，在 5s 后展示实际的列表，要求这里的动效是淡入淡出
  */
 public class Ch3Ex3Activity extends AppCompatActivity {
+    
 
     private View view;
 
