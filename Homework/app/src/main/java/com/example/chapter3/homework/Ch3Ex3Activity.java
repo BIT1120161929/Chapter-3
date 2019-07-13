@@ -15,6 +15,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
 import android.widget.TableLayout;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 /**
  * 使用 ViewPager 和 Fragment 做一个简单版的好友列表界面
  * 1. 使用 ViewPager 和 Fragment 做个可滑动界面
@@ -24,30 +26,19 @@ import android.widget.TableLayout;
 public class Ch3Ex3Activity extends AppCompatActivity {
 
     private View view;
-    private AnimatorSet animatorSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ch3ex3);
+
         view = findViewById(R.id.ll_page);
-
-        //设置五秒淡入
-        ObjectAnimator animatorAlpha = ObjectAnimator.ofFloat(view,"alpha",0.0f,1.0f);
-        animatorAlpha.setRepeatCount(0);
-        animatorAlpha.setInterpolator(new LinearInterpolator());
-        animatorAlpha.setDuration(5000);
-        animatorAlpha.setRepeatMode(ValueAnimator.RESTART);
-
-        animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animatorAlpha);
-        animatorSet.start();
-
 
         ViewPager pager = findViewById(R.id.view_viewpage);
         pager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
+                System.out.println("Ch3Ex3Activity  "+"onCreate()-------------------");
                 return new UsersFragment();
             }
 
