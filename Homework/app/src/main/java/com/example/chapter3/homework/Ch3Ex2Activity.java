@@ -2,6 +2,7 @@ package com.example.chapter3.homework;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -138,11 +141,29 @@ public class Ch3Ex2Activity extends AppCompatActivity {
 
         // TODO ex2-1：在这里实现另一个 ObjectAnimator，对 target 控件的大小进行缩放，从 1 到 2 循环
 
+        ObjectAnimator animatorScaleX = ObjectAnimator.ofFloat(target,"scaleX",1f,2f);
+        animatorScaleX.setRepeatCount(ValueAnimator.INFINITE);
+        animatorScaleX.setInterpolator(new LinearInterpolator());
+        animatorScaleX.setDuration(Integer.parseInt(durationSelector.getText().toString()));
+        animatorScaleX.setRepeatMode(ValueAnimator.REVERSE);
+
+        ObjectAnimator animatorScaleY = ObjectAnimator.ofFloat(target,"scaleY",1f,2f);
+        animatorScaleY.setRepeatCount(ValueAnimator.INFINITE);
+        animatorScaleY.setInterpolator(new LinearInterpolator());
+        animatorScaleY.setDuration(Integer.parseInt(durationSelector.getText().toString()));
+        animatorScaleY.setRepeatMode(ValueAnimator.REVERSE);
+
         // TODO ex2-2：在这里实现另一个 ObjectAnimator，对 target 控件的透明度进行修改，从 1 到 0.5f 循环
+
+        ObjectAnimator animatorAlpha = ObjectAnimator.ofFloat(target,"alpha",0.5f,1.0f);
+        animatorAlpha.setRepeatCount(ValueAnimator.INFINITE);
+        animatorAlpha.setInterpolator(new LinearInterpolator());
+        animatorAlpha.setDuration(Integer.parseInt(durationSelector.getText().toString()));
+        animatorAlpha.setRepeatMode(ValueAnimator.REVERSE);
 
         // TODO ex2-3: 将上面创建的其他 ObjectAnimator 都添加到 AnimatorSet 中
         animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animator1);
+        animatorSet.playTogether(animator1,animatorScaleX,animatorScaleY,animatorAlpha);
         animatorSet.start();
     }
 }
